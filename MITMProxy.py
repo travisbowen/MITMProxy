@@ -6,6 +6,10 @@ from mitmproxy import options #Module to work with the proxy server options.
 from mitmproxy.tools import dump #Module to work with the proxy server.
 
 
+listenHost = input("Enter host: ex.192.168.1.1\n ")
+listenPort = input("Enter port: ex.8080\n ")
+
+
 # This custom class will be used to intercept the requests and responses.
 class InterceptAddon:
     # Initialize the class and set empty list for intercepted requests.
@@ -40,11 +44,11 @@ class InterceptAddon:
         
 
 # Function used to run the proxy server.
-async def run_proxy_server(port=8080):
+async def run_proxy_server(listenHost=listenHost, listenPort=listenPort):
     # Create the options for the proxy server.
-    opts = options.Options(listen_host="192.168.1.100", listen_port=port)
+    opts = options.Options(listen_host=listenHost, listen_port=int(listenPort))
 
-    print(f"Starting proxy server on port {port}")
+    print(f"Starting proxy server on port {listenPort}")
     
     # Create instance with the specified options
     master = dump.DumpMaster(
